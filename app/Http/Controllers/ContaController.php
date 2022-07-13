@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Conta;
 use App\Models\Extrato;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ContaController extends Controller
 {
-    public function deposito(Request $request)
+    public function deposito(Request $request): JsonResponse
     {
         DB::beginTransaction();
         $conta = Conta::whereNumero($request->conta)->first();
@@ -43,7 +44,7 @@ class ContaController extends Controller
         return response()->json(['conta' => $conta, 'extrato' => $extrato]);
     }
 
-    public function saldo(Request $request)
+    public function saldo(Request $request): JsonResponse
     {
         DB::beginTransaction();
         $conta = Conta::whereNumero($request->conta)->with('extratos')->first();
@@ -58,7 +59,7 @@ class ContaController extends Controller
         return response()->json(['conta' => $conta]);
     }
 
-    public function saque(Request $request)
+    public function saque(Request $request): JsonResponse
     {
         DB::beginTransaction();
         $conta = Conta::whereNumero($request->conta)->first();
@@ -102,7 +103,7 @@ class ContaController extends Controller
         return response()->json(['conta' => $conta, 'extrato' => $extrato]);
     }
 
-    public function transferir(Request $request)
+    public function transferir(Request $request): JsonResponse
     {
         DB::beginTransaction();
         $contaOrigem = Conta::whereNumero($request->conta_origem)->first();

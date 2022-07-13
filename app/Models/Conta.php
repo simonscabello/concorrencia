@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static whereNumero(mixed $conta)
+ * @method static lockForUpdate()
+ */
 class Conta extends Model
 {
     use HasFactory;
